@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
-import { useAccount, useConnect, useSigner } from 'wagmi'
-import { Execute, listToken, paths } from '@reservoir0x/client-sdk'
+import { useAccount, useSigner } from 'wagmi'
+import { Execute, listToken } from '@reservoir0x/client-sdk'
 import * as Dialog from '@radix-ui/react-dialog'
 import { DateTime } from 'luxon'
 import { ethers } from 'ethers'
@@ -11,7 +11,6 @@ import { CgSpinner } from 'react-icons/cg'
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
 const List: FC = () => {
-  const [{ data: connectData }, connect] = useConnect()
   const [{ data: accountData }] = useAccount()
   const [{ data: signer }] = useSigner()
   const [steps, setSteps] = useState<Execute['steps']>()
@@ -22,17 +21,41 @@ const List: FC = () => {
 
   const [open, setOpen] = useState(false)
 
-  const contract = tokens.data?.tokens?.[0].token?.contract
-  const tokenId = tokens.data?.tokens?.[0].token?.tokenId
+  const contract = tokens.data?.tokens?.[0]?.token?.contract
+  const tokenId = tokens.data?.tokens?.[0]?.token?.tokenId
 
-  function handleSuccess() {
-    console.log('SUCCESS')
+  const close = () => {
+    // Close modal
+    setOpen(false)
+    // Reset steps
+    setSteps(undefined)
+    // Toggle off waiting state
+    setWaitingTx(false)
   }
 
-  function handleError() {
+  const handleSuccess: Parameters<
+    typeof listToken
+  >[0]['handleSuccess'] = () => {
+    tokens && tokens.mutate()
+    setError(undefined)
+  }
+
+  const handleError: Parameters<typeof listToken>[0]['handleError'] = (
+    err: any
+  ) => {
+    close()
+
     setError(
-      <p className="text-[#FF3B3B] reservoir-body">
-        No MultiFaucet NFT found. Mint a free token here and try again.
+      <p className="text-[#FF3B3B] reservoir-body mb-4">
+        No MultiFaucet NFT found.{' '}
+        <a
+          href="https://faucet.paradigm.xyz/"
+          rel="noopener noreferrer nofollow"
+          className="underline"
+        >
+          Mint a free token
+        </a>{' '}
+        and try again.
       </p>
     )
   }
@@ -67,25 +90,23 @@ const List: FC = () => {
       <div className="reservoir-h6 mb-11">List MultiFaucet NFT for sale</div>
       {error}
       <Dialog.Root open={open} onOpenChange={setOpen}>
-        <Dialog.Trigger asChild>
-          <button
-            disabled={waitingTx}
-            onClick={execute}
-            className="btn-primary-fill"
-          >
-            {waitingTx ? (
-              <CgSpinner className="h-4 w-4 animate-spin" />
-            ) : (
-              'List for sale'
-            )}
-          </button>
+        <Dialog.Trigger
+          disabled={waitingTx}
+          onClick={execute}
+          className="btn-primary-fill"
+        >
+          {waitingTx ? (
+            <CgSpinner className="h-4 w-4 animate-spin" />
+          ) : (
+            'List for sale'
+          )}
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay>
             <ModalCard
               loading={waitingTx}
               title="List Token for Sale"
-              onCloseCallback={() => setSteps(undefined)}
+              close={close}
               steps={steps}
             />
           </Dialog.Overlay>

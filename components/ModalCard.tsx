@@ -6,7 +6,7 @@ import Steps from './Steps'
 
 type Props = {
   loading: boolean
-  onCloseCallback?: () => any
+  close?: () => any
   actionButton?: ReactNode
   steps: Execute['steps']
   title: string
@@ -14,9 +14,8 @@ type Props = {
 
 const ModalCard: FC<Props> = ({
   actionButton,
-  children,
   loading,
-  onCloseCallback,
+  close,
   steps,
   title,
 }) => {
@@ -29,25 +28,19 @@ const ModalCard: FC<Props> = ({
       <div className="fixed top-1/2 left-1/2 w-[460px] -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-white p-11 shadow-md ">
         <div className="mb-4 flex items-center justify-between">
           <Dialog.Title className="reservoir-h4">{title}</Dialog.Title>
-          <Dialog.Close
-            onClick={onCloseCallback}
-            className="btn-primary-outline p-1.5"
-          >
+          <Dialog.Close onClick={close} className="btn-primary-outline p-1.5">
             <HiX className="h-5 w-5" />
           </Dialog.Close>
         </div>
         <Steps steps={steps} />
         {success ? (
-          <Dialog.Close
-            onClick={onCloseCallback}
-            className="btn-primary-outline w-full"
-          >
+          <Dialog.Close onClick={close} className="btn-primary-outline w-full">
             Success, close this menu
           </Dialog.Close>
         ) : (
           <div className="flex gap-4">
             <Dialog.Close
-              onClick={onCloseCallback}
+              onClick={close}
               className="btn-primary-outline w-full"
             >
               Cancel
