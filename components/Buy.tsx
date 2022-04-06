@@ -113,7 +113,7 @@ const Buy: FC = () => {
   return (
     <article className="mb-28">
       <div className="reservoir-h6 mb-11">Buy Rinkeby Loot</div>
-      {!tokenId && (
+      {collection.data && !tokenId && (
         <Error>
           No items for sale. Please{' '}
           <a

@@ -104,7 +104,7 @@ const Cancel: FC = () => {
   return (
     <article className="mb-28">
       <div className="reservoir-h6 mb-11">Cancel Rinkeby Loot listing</div>
-      {!id && <Error>No listing orders to cancel.</Error>}
+      {orders.data && !id && <Error>No listing orders to cancel.</Error>}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
