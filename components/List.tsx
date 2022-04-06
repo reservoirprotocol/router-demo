@@ -8,13 +8,18 @@ import useUserTokens from 'hooks/useUserTokens'
 import ModalCard from './ModalCard'
 import { CgSpinner } from 'react-icons/cg'
 import Error from './Error'
+import useUserAsks from 'hooks/useUserAsks'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
 // https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
-const List: FC = () => {
+type Props = {
+  orders: ReturnType<typeof useUserAsks>
+}
+
+const List: FC<Props> = ({ orders }) => {
   // wagmi hooks
   const [{ data: accountData }] = useAccount()
   const [{ data: signer }] = useSigner()
@@ -61,6 +66,8 @@ const List: FC = () => {
   >[0]['handleSuccess'] = () => {
     // Refetch data from `/users/{user}/tokens/v2`
     tokens && tokens.mutate()
+    // Refetch data from `/orders/asks/v1`
+    orders && orders.mutate()
     // Remove the error message, if any
     setError(undefined)
   }

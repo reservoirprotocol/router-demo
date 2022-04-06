@@ -12,9 +12,12 @@ import Error from './Error'
 // https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
-const Cancel: FC = () => {
+type Props = {
+  orders: ReturnType<typeof useUserAsks>
+}
+
+const Cancel: FC<Props> = ({ orders }) => {
   // wagmi hooks
-  const [{ data: accountData }] = useAccount()
   const [{ data: signer }] = useSigner()
 
   // Steps are shown in the modal to inform user about the
@@ -30,12 +33,6 @@ const Cancel: FC = () => {
 
   // Control the open state for the modal
   const [open, setOpen] = useState(false)
-
-  // Load an user's active list order using
-  //the `/orders/asks/v1` endpoint
-  // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
-  // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
-  const orders = useUserAsks(accountData?.address)
 
   // Extract the order ID from the response
   const id = orders.data?.orders?.[0]?.id
@@ -104,7 +101,11 @@ const Cancel: FC = () => {
   return (
     <article className="mb-28">
       <div className="reservoir-h6 mb-11">Cancel Rinkeby Loot listing</div>
-      {orders.data && !id && <Error>No listing orders to cancel.</Error>}
+      {orders.data && !id && (
+        <Error>
+          No listing found. List Rinkeby Loot for sale above and try again.
+        </Error>
+      )}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
