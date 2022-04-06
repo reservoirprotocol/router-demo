@@ -68,12 +68,14 @@ const Cancel: FC<Props> = ({ orders }) => {
     // Close the steps modal
     close()
 
-    // Set the error message in the UI
-    setError(
-      <Error>
-        No listing found. List Rinkeby Loot for sale above and try again.
-      </Error>
-    )
+    if (err?.code !== 4001) {
+      // Set the error message in the UI
+      setError(
+        <Error>
+          No listing found. List Rinkeby Loot for sale above and try again.
+        </Error>
+      )
+    }
   }
 
   // Execute this function to cancel an user's listing
@@ -111,7 +113,7 @@ const Cancel: FC<Props> = ({ orders }) => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !id}
+          disabled={waitingTx || (orders.data && !id)}
           onClick={execute}
           className="btn-primary-fill w-[222px]"
         >
