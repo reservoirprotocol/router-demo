@@ -1,6 +1,6 @@
 import { cancelOrder, Execute } from '@reservoir0x/client-sdk'
 import useUserAsks from 'hooks/useUserAsks'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useAccount, useSigner } from 'wagmi'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CgSpinner } from 'react-icons/cg'
@@ -104,12 +104,13 @@ const Cancel: FC = () => {
   return (
     <article className="mb-28">
       <div className="reservoir-h6 mb-11">Cancel Rinkeby Loot listing</div>
+      {!id && <Error>No listing orders to cancel.</Error>}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx}
+          disabled={waitingTx || !id}
           onClick={execute}
           className="btn-primary-fill w-[222px]"
         >

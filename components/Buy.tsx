@@ -42,27 +42,6 @@ const Buy: FC = () => {
   // Construct the token with the format `{contract-address}:{token-id}`
   const token = `${CONTRACT_ADDRESS}:${tokenId}`
 
-  useEffect(() => {
-    if (collection.data) {
-      if (!tokenId) {
-        // Set the error message in the UI
-        setError(
-          <Error>
-            No items for sale. Please{' '}
-            <a
-              href="https://discord.gg/j5K9fESNwh"
-              rel="noopener noreferrer nofollow"
-              className="underline"
-            >
-              let us know on Discord.
-            </a>
-          </Error>
-        )
-        return
-      }
-    }
-  }, [tokenId, collection])
-
   // Close the modal and reset parameters
   const close = () => {
     // Close modal
@@ -134,6 +113,18 @@ const Buy: FC = () => {
   return (
     <article className="mb-28">
       <div className="reservoir-h6 mb-11">Buy Rinkeby Loot</div>
+      {!tokenId && (
+        <Error>
+          No items for sale. Please{' '}
+          <a
+            href="https://discord.gg/j5K9fESNwh"
+            rel="noopener noreferrer nofollow"
+            className="underline"
+          >
+            let us know on Discord.
+          </a>
+        </Error>
+      )}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
