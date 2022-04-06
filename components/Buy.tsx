@@ -1,10 +1,11 @@
 import { buyToken, Execute } from '@reservoir0x/client-sdk'
 import useCollection from 'hooks/useCollection'
 import * as Dialog from '@radix-ui/react-dialog'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useSigner } from 'wagmi'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
+import Error from './Error'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -32,13 +33,35 @@ const Buy: FC = () => {
 
   // Load the collection's floor token using
   // the `/collection/v1` endpoint
-  // https://api.reservoir.tools/#/4.%20NFT%20API/getCollectionV1
+  // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getCollectionV1
+  // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getCollectionV1
   const collection = useCollection()
 
   // Extract the token ID of the first index of the user's tokens
   const tokenId = collection.data?.collection?.floorAsk?.token?.tokenId
   // Construct the token with the format `{contract-address}:{token-id}`
   const token = `${CONTRACT_ADDRESS}:${tokenId}`
+
+  useEffect(() => {
+    if (collection.data) {
+      if (!tokenId) {
+        // Set the error message in the UI
+        setError(
+          <Error>
+            No items for sale. Please{' '}
+            <a
+              href="https://discord.gg/j5K9fESNwh"
+              rel="noopener noreferrer nofollow"
+              className="underline"
+            >
+              let us know on Discord.
+            </a>
+          </Error>
+        )
+        return
+      }
+    }
+  }, [tokenId, collection])
 
   // Close the modal and reset parameters
   const close = () => {
@@ -67,20 +90,23 @@ const Buy: FC = () => {
     // Close the steps modal
     close()
 
-    // Set the error message in the UI
-    setError(
-      <p className="text-[#FF3B3B] reservoir-body mb-4">
-        Insufficent funds.{' '}
-        <a
-          href="https://faucet.paradigm.xyz/"
-          rel="noopener noreferrer nofollow"
-          className="underline"
-        >
-          Top up your Rinkeby ETH
-        </a>{' '}
-        and try again.
-      </p>
-    )
+    // Differentiate error messages
+    if (err?.message === 'Taker does not have sufficient balance') {
+      // Set the error message in the UI
+      setError(
+        <Error>
+          Insufficent funds.{' '}
+          <a
+            href="https://faucet.paradigm.xyz/"
+            rel="noopener noreferrer nofollow"
+            className="underline"
+          >
+            Top up your Rinkeby ETH
+          </a>{' '}
+          and try again.
+        </Error>
+      )
+    }
   }
 
   // Execute this function to buy a token
@@ -115,19 +141,19 @@ const Buy: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx}
           onClick={execute}
-          className="btn-primary-fill"
+          className="btn-primary-fill w-[222px]"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
           ) : (
-            'Buy Rinkeby Loot'
+            'Buy Now'
           )}
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay>
             <ModalCard
               loading={waitingTx}
-              title="Buy Rinkeby Loot"
+              title="Buy Now"
               close={close}
               steps={steps}
             />

@@ -5,6 +5,7 @@ import ModalCard from './ModalCard'
 import { acceptOffer, Execute } from '@reservoir0x/client-sdk'
 import { useAccount, useSigner } from 'wagmi'
 import useUserTokens from 'hooks/useUserTokens'
+import Error from './Error'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -33,7 +34,8 @@ const Accept: FC = () => {
 
   // Load the user's tokens using
   // the `/users/{user}/tokens/v2` endpoint
-  // https://api.reservoir.tools/#/4.%20NFT%20API/getUsersUserTokensV2
+  // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getUsersUserTokensV2
+  // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getUsersUserTokensV2
   const tokens = useUserTokens(accountData?.address)
 
   // Extract the token ID of the first index of the user's tokens
@@ -72,17 +74,7 @@ const Accept: FC = () => {
 
     // Set the error message in the UI
     setError(
-      <p className="text-[#FF3B3B] reservoir-body mb-4">
-        No Rinkeby Loot found.{' '}
-        <a
-          href="https://faucet.paradigm.xyz/"
-          rel="noopener noreferrer nofollow"
-          className="underline"
-        >
-          Mint a free token
-        </a>{' '}
-        and try again.
-      </p>
+      <Error>No Rinkeby Loot found. Please buy one above and try again.</Error>
     )
   }
 
@@ -118,7 +110,7 @@ const Accept: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx}
           onClick={execute}
-          className="btn-primary-fill"
+          className="btn-primary-fill w-[222px]"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />

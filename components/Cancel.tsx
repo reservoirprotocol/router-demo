@@ -5,6 +5,7 @@ import { useAccount, useSigner } from 'wagmi'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
+import Error from './Error'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -32,7 +33,8 @@ const Cancel: FC = () => {
 
   // Load an user's active list order using
   //the `/orders/asks/v1` endpoint
-  // https://api.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
+  // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
+  // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
   const orders = useUserAsks(accountData?.address)
 
   // Extract the order ID from the response
@@ -71,9 +73,9 @@ const Cancel: FC = () => {
 
     // Set the error message in the UI
     setError(
-      <p className="text-[#FF3B3B] reservoir-body mb-4">
+      <Error>
         No listing found. List Rinkeby Loot for sale above and try again.
-      </p>
+      </Error>
     )
   }
 
@@ -109,19 +111,19 @@ const Cancel: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx}
           onClick={execute}
-          className="btn-primary-fill"
+          className="btn-primary-fill w-[222px]"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
           ) : (
-            'Cancel Rinkeby Loot listing'
+            'Cancel Listing'
           )}
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay>
             <ModalCard
               loading={waitingTx}
-              title="Cancel Rinkeby Loot listing"
+              title="Cancel Listing"
               close={close}
               steps={steps}
             />
