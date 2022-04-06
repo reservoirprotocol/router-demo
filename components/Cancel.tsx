@@ -15,7 +15,7 @@ const Cancel: FC = () => {
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
   const [error, setError] = useState<any>(undefined)
 
-  const orders = useUserAsks(API_BASE, accountData?.address)
+  const orders = useUserAsks(accountData?.address)
 
   const id = orders.data?.orders?.[0]?.id
   const maker = orders.data?.orders?.[0]?.maker

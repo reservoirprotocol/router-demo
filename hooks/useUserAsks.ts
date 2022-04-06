@@ -2,19 +2,18 @@ import { paths, setParams } from '@reservoir0x/client-sdk'
 import fetcher from 'lib/fetcher'
 import useSWR from 'swr'
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE
+
 type Orders = paths['/orders/asks/v1']['get']['responses']['200']['schema']
 
-export default function useUserAsks(
-  API_BASE: string | undefined,
-  maker: string | undefined
-) {
+export default function useUserAsks(maker: string | undefined) {
   function getUrl() {
     if (!API_BASE || !maker) return undefined
 
     const url = new URL(`/orders/asks/v1`, API_BASE)
 
     let query: paths['/orders/asks/v1']['get']['parameters']['query'] = {
-      limit: 20,
+      limit: 1,
       maker,
       status: 'active',
     }

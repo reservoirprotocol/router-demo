@@ -17,7 +17,7 @@ const List: FC = () => {
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
   const [error, setError] = useState<any>(undefined)
 
-  const tokens = useUserTokens(API_BASE, accountData?.address)
+  const tokens = useUserTokens(accountData?.address)
 
   const [open, setOpen] = useState(false)
 

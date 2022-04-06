@@ -2,15 +2,13 @@ import { paths, setParams } from '@reservoir0x/client-sdk'
 import fetcher from 'lib/fetcher'
 import useSWR from 'swr'
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
 
 type Tokens =
   paths['/users/{user}/tokens/v2']['get']['responses']['200']['schema']
 
-export default function useUserTokens(
-  API_BASE: string | undefined,
-  user: string | undefined
-) {
+export default function useUserTokens(user: string | undefined) {
   function getUrl() {
     if (!API_BASE || !user) return undefined
 
@@ -18,7 +16,7 @@ export default function useUserTokens(
 
     let query: paths['/users/{user}/tokens/v2']['get']['parameters']['query'] =
       {
-        limit: 20,
+        limit: 1,
         collection: CONTRACT_ADDRESS,
       }
 
