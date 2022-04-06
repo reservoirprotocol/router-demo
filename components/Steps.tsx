@@ -8,6 +8,7 @@ type Props = {
 }
 
 const Steps: FC<Props> = ({ steps }) => {
+  // Get the first incomplete step to display a loading indicator
   const firstIncomplete = steps?.findIndex(
     ({ status }) => status === 'incomplete'
   )
@@ -30,6 +31,7 @@ const Steps: FC<Props> = ({ steps }) => {
             )}
           </div>
           <div>
+            {/* Display the step's information */}
             <div className="reservoir-h6 mb-1 mt-0.5">{action}</div>
             {error && (
               <div className="reservoir-h6 mb-2.5 text-red-800">{error}</div>

@@ -3,8 +3,9 @@ import { useAccount, useConnect } from 'wagmi'
 import EthAccount from './EthAccount'
 
 const ConnectWallet = () => {
+  // wagmi hooks
   const [{ data: connectData }, connect] = useConnect()
-  const [{ data: accountData, loading }, disconnect] = useAccount({
+  const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
   })
   const wallet = connectData.connectors[0]
@@ -15,10 +16,12 @@ const ConnectWallet = () => {
         Connect wallet to Rinkeby testnet
       </div>
       {accountData ? (
+        // If the user is connected, make the button disconnect when clicked
         <button
           className="btn-primary-outline rounded-full border-transparent bg-gray-100 normal-case"
           onClick={() => disconnect()}
         >
+          {/* When the user is connected, display his ENS or Ethereum account  */}
           <EthAccount
             address={accountData.address}
             ens={{
@@ -28,6 +31,7 @@ const ConnectWallet = () => {
           />
         </button>
       ) : (
+        // Create a connect wallet button
         <button onClick={() => connect(wallet)} className="btn-primary-fill">
           Connect Wallet
         </button>
