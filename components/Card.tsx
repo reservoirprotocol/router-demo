@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 const Card: FC = ({ children }) => (
-  <article className="border-2 p-3 lg:p-5 border-primary-900 rounded-md">
+  <article className="rounded-2xl border border-[#D1D5DB] p-6">
     {children}
   </article>
 )
