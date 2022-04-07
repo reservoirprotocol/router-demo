@@ -6,6 +6,7 @@ import { acceptOffer, Execute } from '@reservoir0x/client-sdk'
 import { useAccount, useSigner } from 'wagmi'
 import useUserTokens from 'hooks/useUserTokens'
 import Error from './Error'
+import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -101,8 +102,8 @@ const Accept: FC = () => {
   }
 
   return (
-    <article className="mb-28">
-      <div className="reservoir-h6 mb-11">Accept offer on Rinkeby Loot</div>
+    <Card>
+      <div className="reservoir-h6 mb-8">Accept offer on Rinkeby Loot</div>
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
@@ -129,7 +130,7 @@ const Accept: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </article>
+    </Card>
   )
 }
 

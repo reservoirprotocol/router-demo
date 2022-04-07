@@ -6,6 +6,7 @@ import { useSigner } from 'wagmi'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import Error from './Error'
+import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -111,8 +112,8 @@ const Buy: FC = () => {
   }
 
   return (
-    <article className="mb-28">
-      <div className="reservoir-h6 mb-11">Buy Rinkeby Loot</div>
+    <Card>
+      <div className="reservoir-h6 mb-8">Buy Rinkeby Loot</div>
       {collection.data && !tokenId && (
         <Error>
           No items for sale. Please{' '}
@@ -151,7 +152,7 @@ const Buy: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </article>
+    </Card>
   )
 }
 

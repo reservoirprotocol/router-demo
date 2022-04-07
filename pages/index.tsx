@@ -24,13 +24,15 @@ const IndexPage = () => {
     <Layout>
       <h1 className="reservoir-h1 mb-20 mt-28">Reservoir Client SDK Demo</h1>
       <ConnectWallet />
-      <Buy />
-      <List orders={orders} />
-      <Cancel orders={orders} />
-      <Accept />
-      <TokenOffer />
-      <CollectionOffer />
-      <AttributeOffer />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-28">
+        <Buy />
+        <List orders={orders} />
+        <Cancel orders={orders} />
+        <Accept />
+        <TokenOffer />
+        <CollectionOffer />
+        <AttributeOffer />
+      </div>
     </Layout>
   )
 }

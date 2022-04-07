@@ -9,6 +9,7 @@ import ModalCard from './ModalCard'
 import { CgSpinner } from 'react-icons/cg'
 import Error from './Error'
 import useUserAsks from 'hooks/useUserAsks'
+import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -123,8 +124,8 @@ const List: FC<Props> = ({ orders }) => {
   }
 
   return (
-    <article className="mb-28">
-      <div className="reservoir-h6 mb-11">List Rinkeby Loot for sale</div>
+    <Card>
+      <div className="reservoir-h6 mb-8">List Rinkeby Loot for sale</div>
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
@@ -151,7 +152,7 @@ const List: FC<Props> = ({ orders }) => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </article>
+    </Card>
   )
 }
 

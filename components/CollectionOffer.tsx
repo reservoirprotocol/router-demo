@@ -7,6 +7,7 @@ import ModalCard from './ModalCard'
 import { DateTime } from 'luxon'
 import { ethers } from 'ethers'
 import Error from './Error'
+import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -107,8 +108,8 @@ const CollectionOffer: FC = () => {
   }
 
   return (
-    <article className="mb-28">
-      <div className="reservoir-h6 mb-11">
+    <Card>
+      <div className="reservoir-h6 mb-8">
         Make a collection offer on Rinkeby Loot
       </div>
       {error}
@@ -137,7 +138,7 @@ const CollectionOffer: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </article>
+    </Card>
   )
 }
 
