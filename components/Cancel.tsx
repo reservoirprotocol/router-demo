@@ -1,7 +1,7 @@
 import { cancelOrder, Execute } from '@reservoir0x/client-sdk'
 import useUserAsks from 'hooks/useUserAsks'
-import React, { FC, useEffect, useState } from 'react'
-import { useAccount, useSigner } from 'wagmi'
+import React, { FC, useState } from 'react'
+import { useSigner } from 'wagmi'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
@@ -72,7 +72,7 @@ const Cancel: FC<Props> = ({ orders }) => {
       // Set the error message in the UI
       setError(
         <Error>
-          No listing found. List Rinkeby Loot for sale above and try again.
+          No listing found. List Rinkeby Loot for sale and try again.
         </Error>
       )
     }
@@ -105,7 +105,7 @@ const Cancel: FC<Props> = ({ orders }) => {
       <div className="reservoir-h6 mb-11">Cancel Rinkeby Loot listing</div>
       {orders.data && !id && (
         <Error>
-          No listing found. List Rinkeby Loot for sale above and try again.
+          No listing found. List Rinkeby Loot for sale and try again.
         </Error>
       )}
       {error}
@@ -113,7 +113,7 @@ const Cancel: FC<Props> = ({ orders }) => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || (orders.data && !id)}
+          disabled={waitingTx || !signer || (orders.data && !id)}
           onClick={execute}
           className="btn-primary-fill w-[222px]"
         >

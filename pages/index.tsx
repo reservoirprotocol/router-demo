@@ -1,9 +1,12 @@
 import Accept from 'components/Accept'
+import AttributeOffer from 'components/AttributeOffer'
 import Buy from 'components/Buy'
 import Cancel from 'components/Cancel'
+import CollectionOffer from 'components/CollectionOffer'
 import ConnectWallet from 'components/ConnectWallet'
 import Layout from 'components/Layout'
 import List from 'components/List'
+import TokenOffer from 'components/TokenOffer'
 import useUserAsks from 'hooks/useUserAsks'
 import { useAccount } from 'wagmi'
 
@@ -25,6 +28,9 @@ const IndexPage = () => {
       <List orders={orders} />
       <Cancel orders={orders} />
       <Accept />
+      <TokenOffer />
+      <CollectionOffer />
+      <AttributeOffer />
     </Layout>
   )
 }

@@ -74,7 +74,7 @@ const Accept: FC = () => {
 
     // Set the error message in the UI
     setError(
-      <Error>No Rinkeby Loot found. Please buy one above and try again.</Error>
+      <Error>No Rinkeby Loot found. Please buy one and try again.</Error>
     )
   }
 
@@ -108,7 +108,7 @@ const Accept: FC = () => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx}
+          disabled={waitingTx || !signer}
           onClick={execute}
           className="btn-primary-fill w-[222px]"
         >

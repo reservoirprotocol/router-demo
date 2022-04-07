@@ -1,7 +1,7 @@
 import { buyToken, Execute } from '@reservoir0x/client-sdk'
 import useCollection from 'hooks/useCollection'
 import * as Dialog from '@radix-ui/react-dialog'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useSigner } from 'wagmi'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
@@ -130,7 +130,7 @@ const Buy: FC = () => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx}
+          disabled={waitingTx || !signer}
           onClick={execute}
           className="btn-primary-fill w-[222px]"
         >
