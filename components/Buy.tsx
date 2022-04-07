@@ -74,7 +74,7 @@ const Buy: FC = () => {
       // Set the error message in the UI
       setError(
         <Error>
-          Insufficent funds.{' '}
+          Insufficient funds.{' '}
           <a
             href="https://faucet.paradigm.xyz/"
             rel="noopener noreferrer nofollow"

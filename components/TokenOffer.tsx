@@ -7,6 +7,7 @@ import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import { DateTime } from 'luxon'
 import { ethers } from 'ethers'
+import Error from './Error'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -26,6 +27,9 @@ const TokenOffer: FC = () => {
 
   // Loading state for the action button
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
+
+  // Error state for the action button
+  const [error, setError] = useState<any>(undefined)
 
   // Control the open state for the modal
   const [open, setOpen] = useState(false)
@@ -65,6 +69,24 @@ const TokenOffer: FC = () => {
   ) => {
     // Close the steps modal
     close()
+
+    // Differentiate error messages
+    if (err?.message === 'Maker does not have sufficient balance') {
+      // Set the error message in the UI
+      setError(
+        <Error>
+          Insufficient funds.{' '}
+          <a
+            href="https://faucet.paradigm.xyz/"
+            rel="noopener noreferrer nofollow"
+            className="underline"
+          >
+            Top up your Rinkeby ETH
+          </a>{' '}
+          and try again.
+        </Error>
+      )
+    }
   }
 
   const maker = accountData?.address
@@ -110,6 +132,7 @@ const TokenOffer: FC = () => {
       <div className="reservoir-h6 mb-11">
         Make a single token offer on Rinkeby Loot
       </div>
+      {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
