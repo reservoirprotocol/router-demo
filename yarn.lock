@@ -790,10 +790,10 @@
   resolved "https://registry.yarnpkg.com/@ramosdiego/reservoir/-/reservoir-0.0.15.tgz#f353108b8d82b63d9d4b8153b9b8f2ae63aab5a4"
   integrity sha512-RkzFrcdKolOUiJNP+2iq8qQpvZc8qOGvrF7iKwaraAY6MNunaFtZn0fXxlhbFMk8RcXDcXJ9L+JojB23nRAu2g==
 
-"@reservoir0x/client-sdk@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@reservoir0x/client-sdk/-/client-sdk-0.0.7.tgz#9e9ebb5f7ea0fe8a88af5263e918f4f54e8b05db"
-  integrity sha512-BSwvy4CyG4zWTuetzwz+HP8+PmoYVDuwr5n2ykKc9duKMHQgqFR3qRUlUtApGkCW7lcfrd4yoh7n8KW53Eg+/w==
+"@reservoir0x/client-sdk@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@reservoir0x/client-sdk/-/client-sdk-0.0.9.tgz#22708701ae203f760b405e7d2496f9ca94c0f329"
+  integrity sha512-uP9MVsACRFqZdBuPwFUJkyfiimakRi/ycAOvJ6ts8zaVPJAE+pnh6PxD17af4Du8xGTi4bqWjjB5sP5NuaJMAA==
   dependencies:
     ethers "^5.6.1"
 

@@ -14,7 +14,7 @@
   "devDependencies": {
     "@radix-ui/react-dialog": "^0.1.7",
     "@ramosdiego/reservoir": "^0.0.15",
-    "@reservoir0x/client-sdk": "^0.0.7",
+    "@reservoir0x/client-sdk": "^0.0.9",
     "@types/luxon": "^2.3.1",
     "@types/node": "^12.12.21",
     "@types/react": "^17.0.2",
