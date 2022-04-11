@@ -2,6 +2,8 @@
 
 The Reservoir client SDK contains helper functions to execute common actions for an NFT marketplace.
 
+Read the [`@reservoir0x/client-sdk` source code](https://github.com/reservoirprotocol/client-sdk).
+
 ## Install
 
 To install [@reservoir0x/client-sdk](https://www.npmjs.com/package/@reservoir0x/client-sdk), run the following commands in your terminal:
