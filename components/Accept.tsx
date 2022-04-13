@@ -6,7 +6,6 @@ import { acceptOffer, Execute } from '@reservoir0x/client-sdk'
 import { useAccount, useSigner } from 'wagmi'
 import useUserTokens from 'hooks/useUserTokens'
 import Error from './Error'
-import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -102,8 +101,7 @@ const Accept: FC = () => {
   }
 
   return (
-    <Card>
-      <div className="reservoir-h6 mb-8">Accept offer on Rinkeby Loot</div>
+    <article>
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
@@ -111,7 +109,7 @@ const Accept: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx || !signer}
           onClick={execute}
-          className="btn-primary-fill w-[222px]"
+          className="btn-primary-fill w-[222px] mx-auto"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
@@ -130,7 +128,7 @@ const Accept: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </Card>
+    </article>
   )
 }
 

@@ -8,7 +8,6 @@ import ModalCard from './ModalCard'
 import { DateTime } from 'luxon'
 import { ethers } from 'ethers'
 import Error from './Error'
-import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -129,10 +128,7 @@ const TokenOffer: FC = () => {
   }
 
   return (
-    <Card>
-      <div className="reservoir-h6 mb-8">
-        Make a single token offer on Rinkeby Loot
-      </div>
+    <article>
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
@@ -140,7 +136,7 @@ const TokenOffer: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx || !signer || !maker}
           onClick={() => maker && execute(maker)}
-          className="btn-primary-fill w-[222px]"
+          className="btn-primary-fill w-[222px] mx-auto"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
@@ -159,7 +155,7 @@ const TokenOffer: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </Card>
+    </article>
   )
 }
 

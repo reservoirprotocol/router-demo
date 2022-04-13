@@ -11,10 +11,7 @@ const ConnectWallet = () => {
   const wallet = connectData.connectors[0]
 
   return (
-    <article className="mb-28">
-      <div className="reservoir-h6 mb-11">
-        Connect wallet to Rinkeby testnet
-      </div>
+    <article>
       {accountData ? (
         // If the user is connected, make the button disconnect when clicked
         <button
@@ -32,7 +29,10 @@ const ConnectWallet = () => {
         </button>
       ) : (
         // Create a connect wallet button
-        <button onClick={() => connect(wallet)} className="btn-primary-fill">
+        <button
+          onClick={() => connect(wallet)}
+          className="btn-primary-fill w-[222px]"
+        >
           Connect Wallet
         </button>
       )}

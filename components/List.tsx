@@ -9,7 +9,6 @@ import ModalCard from './ModalCard'
 import { CgSpinner } from 'react-icons/cg'
 import Error from './Error'
 import useUserAsks from 'hooks/useUserAsks'
-import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -88,7 +87,7 @@ const List: FC<Props> = ({ orders }) => {
   }
 
   // Execute this function to list a token
-  const execute = async () => {
+  const execute = async (maker: string) => {
     // Set the loading state on
     setWaitingTx(true)
 
@@ -97,7 +96,7 @@ const List: FC<Props> = ({ orders }) => {
         // Set the order book to reservoir
         orderbook: 'reservoir',
         // Get the Ethereum address for the current user
-        maker: accountData?.address,
+        maker,
         // Set the list price to 0.01 ETH
         weiPrice: ethers.utils.parseEther('0.01').toString(),
         // The token format is `{contract-address}:{token-id}`
@@ -123,17 +122,18 @@ const List: FC<Props> = ({ orders }) => {
     setWaitingTx(false)
   }
 
+  const maker = accountData?.address
+
   return (
-    <Card>
-      <div className="reservoir-h6 mb-8">List Rinkeby Loot for sale</div>
+    <article>
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !signer}
-          onClick={execute}
-          className="btn-primary-fill w-[222px]"
+          disabled={waitingTx || !signer || !maker}
+          onClick={() => maker && execute(maker)}
+          className="btn-primary-fill w-[222px] mx-auto"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
@@ -152,7 +152,7 @@ const List: FC<Props> = ({ orders }) => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </Card>
+    </article>
   )
 }
 

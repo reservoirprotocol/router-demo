@@ -6,7 +6,6 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import Error from './Error'
-import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -102,8 +101,7 @@ const Cancel: FC<Props> = ({ orders }) => {
   }
 
   return (
-    <Card>
-      <div className="reservoir-h6 mb-8">Cancel Rinkeby Loot listing</div>
+    <article>
       {orders.data && !id && (
         <Error>
           No listing found. List Rinkeby Loot for sale and try again.
@@ -116,7 +114,7 @@ const Cancel: FC<Props> = ({ orders }) => {
         <Dialog.Trigger
           disabled={waitingTx || !signer || (orders.data && !id)}
           onClick={execute}
-          className="btn-primary-fill w-[222px]"
+          className="btn-primary-fill w-[222px] mx-auto"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
@@ -135,7 +133,7 @@ const Cancel: FC<Props> = ({ orders }) => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </Card>
+    </article>
   )
 }
 

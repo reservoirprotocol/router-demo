@@ -6,7 +6,6 @@ import { useSigner } from 'wagmi'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import Error from './Error'
-import Card from './Card'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -112,8 +111,7 @@ const Buy: FC = () => {
   }
 
   return (
-    <Card>
-      <div className="reservoir-h6 mb-8">Buy Rinkeby Loot</div>
+    <article>
       {collection.data && !tokenId && (
         <Error>
           No items for sale. Please{' '}
@@ -133,7 +131,7 @@ const Buy: FC = () => {
         <Dialog.Trigger
           disabled={waitingTx || !signer}
           onClick={execute}
-          className="btn-primary-fill w-[222px]"
+          className="btn-primary-fill w-[222px] mx-auto"
         >
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin" />
@@ -152,7 +150,7 @@ const Buy: FC = () => {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-    </Card>
+    </article>
   )
 }
 

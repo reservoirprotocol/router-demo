@@ -20,10 +20,13 @@ const IndexPage = () => {
   // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
   // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getOrdersAsksV1
   const orders = useUserAsks(accountData?.address)
+  const userAddress = accountData?.address
 
   return (
     <Layout>
-      <h1 className="reservoir-h1 mb-2 mt-28">Reservoir Client SDK Demo</h1>
+      <h1 className="reservoir-h1 mb-2 mt-6 md:mt-28">
+        Reservoir Client SDK Demo
+      </h1>
       <a
         className="reservoir-h5 inline-flex items-center mb-2"
         href="https://github.com/reservoirprotocol/client-sdk-demo"
@@ -41,8 +44,8 @@ const IndexPage = () => {
         @reservoir0x/client-sdk
         <FiExternalLink className="w-4 h-4 ml-2" />
       </a>
-      <ConnectWallet />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-28">
+      <div className="grid place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-12">
+        <ConnectWallet />
         <Buy />
         <List orders={orders} />
         <Cancel orders={orders} />
@@ -51,6 +54,31 @@ const IndexPage = () => {
         <CollectionOffer />
         <AttributeOffer />
       </div>
+      <p className="mb-4">
+        This demo is using the{' '}
+        <a
+          className="underline"
+          target="_blank"
+          href="https://www.reservoir.fun/collections/0x79e2d470f950f2cf78eef41720e8ff2cf4b3cd78"
+          rel="norefereer noopener"
+        >
+          Loot Contract
+        </a>{' '}
+        on Rinkeby.
+      </p>
+      {userAddress && (
+        <p>
+          View your Rinkeby orders on{' '}
+          <a
+            className="underline"
+            target="_blank"
+            href={`https://www.reservoir.fun/address/${userAddress}`}
+          >
+            Reservoir Market Testnet
+          </a>
+          .
+        </p>
+      )}
     </Layout>
   )
 }
