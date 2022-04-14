@@ -33,16 +33,8 @@ const MultiBuy: FC = () => {
   // Control the open state for the modal
   const [open, setOpen] = useState(false)
 
-  // Load the collection's floor token using
-  // the `/collection/v1` endpoint
-  // MAINNET: https://api.reservoir.tools/#/4.%20NFT%20API/getCollectionV1
-  // RINKEBY: https://api-rinkeby.reservoir.tools/#/4.%20NFT%20API/getCollectionV1
-  const collection = useCollection(ERC1155_CONTRACT_ADDRESS)
-
-  // Extract the token ID of the first index of the user's tokens
-  const tokenId = collection.data?.collection?.floorAsk?.token?.tokenId
   // Construct the token with the format `{contract-address}:{token-id}`
-  const token = `${ERC1155_CONTRACT_ADDRESS}:${tokenId}`
+  const token = `${ERC1155_CONTRACT_ADDRESS}:1`
 
   // Close the modal and reset parameters
   const close = () => {
@@ -57,8 +49,6 @@ const MultiBuy: FC = () => {
   // Execute the following function when the transaction has been
   // completed sucessfully
   const handleSuccess: Parameters<typeof buyToken>[0]['handleSuccess'] = () => {
-    // Refetch data from `/collection/v1`
-    collection && collection.mutate()
     // Remove the error message, if any
     setError(undefined)
   }
@@ -87,6 +77,8 @@ const MultiBuy: FC = () => {
           and try again.
         </Error>
       )
+    } else {
+      setError(<Error>{err?.message}</Error>)
     }
   }
 
@@ -122,24 +114,12 @@ const MultiBuy: FC = () => {
 
   return (
     <article>
-      {collection.data && !tokenId && (
-        <Error>
-          No items for sale. Please{' '}
-          <a
-            href="https://discord.gg/j5K9fESNwh"
-            rel="noopener noreferrer nofollow"
-            className="underline"
-          >
-            let us know on Discord.
-          </a>
-        </Error>
-      )}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !signer || !taker || !tokenId}
+          disabled={waitingTx || !signer || !taker}
           onClick={() => taker && execute(taker)}
           className="btn-primary-fill w-[222px] mx-auto"
         >
