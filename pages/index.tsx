@@ -10,6 +10,7 @@ import TokenOffer from 'components/TokenOffer'
 import useUserAsks from 'hooks/useUserAsks'
 import { useAccount } from 'wagmi'
 import { FiExternalLink } from 'react-icons/fi'
+import MultiBuy from 'components/MultiBuy'
 
 const IndexPage = () => {
   // wagmi hooks
@@ -53,6 +54,7 @@ const IndexPage = () => {
         <TokenOffer />
         <CollectionOffer />
         <AttributeOffer />
+        <MultiBuy />
       </div>
       <p className="mb-4">
         This demo is using the{' '}
