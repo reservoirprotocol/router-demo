@@ -6,6 +6,7 @@ import { useAccount, useSigner } from 'wagmi'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import Error from './Error'
+import useIsWrongNetwork from 'hooks/useIsWrongNetwork'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -18,6 +19,9 @@ const MultiBuy: FC = () => {
   // wagmi hooks
   const [{ data: signer }] = useSigner()
   const [{ data: accountData }] = useAccount()
+
+  // Check if the user is connected to the wrong Ethereum Network
+  const isWrongNetwork = useIsWrongNetwork()
 
   // Steps are shown in the modal to inform user about the
   // progress of execution for the current action.
@@ -119,7 +123,7 @@ const MultiBuy: FC = () => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !signer || !taker}
+          disabled={isWrongNetwork || waitingTx || !signer || !taker}
           onClick={() => taker && execute(taker)}
           className="btn-primary-fill w-[222px] mx-auto"
         >

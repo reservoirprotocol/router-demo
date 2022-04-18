@@ -6,6 +6,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CgSpinner } from 'react-icons/cg'
 import ModalCard from './ModalCard'
 import Error from './Error'
+import useIsWrongNetwork from 'hooks/useIsWrongNetwork'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -19,6 +20,9 @@ type Props = {
 const Cancel: FC<Props> = ({ orders }) => {
   // wagmi hooks
   const [{ data: signer }] = useSigner()
+
+  // Check if the user is connected to the wrong Ethereum Network
+  const isWrongNetwork = useIsWrongNetwork()
 
   // Steps are shown in the modal to inform user about the
   // progress of execution for the current action.
@@ -112,7 +116,9 @@ const Cancel: FC<Props> = ({ orders }) => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !signer || (orders.data && !id)}
+          disabled={
+            isWrongNetwork || waitingTx || !signer || (orders.data && !id)
+          }
           onClick={execute}
           className="btn-primary-fill w-[222px] mx-auto"
         >

@@ -6,6 +6,7 @@ import { acceptOffer, Execute } from '@reservoir0x/client-sdk'
 import { useAccount, useSigner } from 'wagmi'
 import useUserTokens from 'hooks/useUserTokens'
 import Error from './Error'
+import useIsWrongNetwork from 'hooks/useIsWrongNetwork'
 
 // Load environment variables using the appropiate Next.js
 // nomenclature
@@ -17,6 +18,9 @@ const Accept: FC = () => {
   // wagmi hooks
   const [{ data: accountData }] = useAccount()
   const [{ data: signer }] = useSigner()
+
+  // Check if the user is connected to the wrong Ethereum Network
+  const isWrongNetwork = useIsWrongNetwork()
 
   // Steps are shown in the modal to inform user about the
   // progress of execution for the current action.
@@ -107,7 +111,7 @@ const Accept: FC = () => {
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={waitingTx || !signer}
+          disabled={waitingTx || !signer || isWrongNetwork}
           onClick={execute}
           className="btn-primary-fill w-[222px] mx-auto"
         >
