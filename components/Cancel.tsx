@@ -76,7 +76,7 @@ const Cancel: FC<Props> = ({ orders }) => {
       // Set the error message in the UI
       setError(
         <Error>
-          No listing found. List Rinkeby Reservoir 721 for sale and try again.
+          No listing found. List Reservoir 721 for sale and try again.
         </Error>
       )
     }
@@ -110,7 +110,7 @@ const Cancel: FC<Props> = ({ orders }) => {
     <article>
       {orders.data && !id && (
         <Error>
-          No listing found. List Rinkeby Reservoir 721 for sale and try again.
+          No listing found. List Reservoir 721 for sale and try again.
         </Error>
       )}
       {error}

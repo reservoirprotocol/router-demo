@@ -86,9 +86,7 @@ const List: FC<Props> = ({ orders }) => {
 
     // Set the error message in the UI
     setError(
-      <Error>
-        No Rinkeby Reservoir 721 found. Please buy a token and try again.
-      </Error>
+      <Error>No Reservoir 721 found. Please buy a token and try again.</Error>
     )
   }
 
