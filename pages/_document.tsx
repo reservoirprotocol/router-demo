@@ -16,7 +16,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <title>client-sdk-demo</title>
+        <title>Reservoir Router Demo</title>
         <link rel="shortcut icon" type="image/svg" href="/reservoir.svg" />
         <body>
           <Main />
