@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "name": "router-demo",
   "scripts": {
     "dev": "next",
     "build": "next build",

@@ -25,12 +25,10 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <h1 className="reservoir-h1 mb-2 mt-6 md:mt-28">
-        Reservoir Client SDK Demo
-      </h1>
+      <h1 className="reservoir-h1 mb-2 mt-6 md:mt-28">Reservoir Router Demo</h1>
       <a
         className="reservoir-h5 inline-flex items-center mb-2"
-        href="https://github.com/reservoirprotocol/client-sdk-demo"
+        href="https://github.com/reservoirprotocol/router-demo"
         rel="norefereer noopener"
       >
         Source code
@@ -38,8 +36,17 @@ const IndexPage = () => {
       </a>
       <br />
       <a
+        className="reservoir-h5 inline-flex items-center mb-2"
+        href="https://reservoirprotocol.github.io/docs/api/use-cases/execute-orders"
+        rel="norefereer noopener"
+      >
+        Router documentation
+        <FiExternalLink className="w-4 h-4 ml-2" />
+      </a>
+      <br />
+      <a
         className="reservoir-h5 inline-flex items-center mb-14"
-        href="https://www.npmjs.com/package/@reservoir0x/client-sdk"
+        href="https://github.com/reservoirprotocol/client-sdk"
         rel="norefereer noopener"
       >
         @reservoir0x/client-sdk
@@ -66,7 +73,16 @@ const IndexPage = () => {
         >
           Reservoir 721
         </a>{' '}
-        collection on Rinkeby.
+        and
+        <a
+          className="underline"
+          target="_blank"
+          href="https://www.reservoir.fun/collections/0xfb8695dc919078c37fe507b800e2c33ed3d815d8"
+          rel="norefereer noopener"
+        >
+          Reservoir 1155
+        </a>{' '}
+        collections on Rinkeby.
       </p>
       {userAddress && (
         <p>

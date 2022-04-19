@@ -78,7 +78,9 @@ const Accept: FC = () => {
 
     // Set the error message in the UI
     setError(
-      <Error>No Rinkeby Loot found. Please buy one and try again.</Error>
+      <Error>
+        No Rinkeby Reservoir 721 found. Please buy one and try again.
+      </Error>
     )
   }
 
