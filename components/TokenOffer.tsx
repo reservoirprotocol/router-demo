@@ -13,7 +13,7 @@ import useIsWrongNetwork from 'hooks/useIsWrongNetwork'
 // Load environment variables using the appropiate Next.js
 // nomenclature
 // https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
-const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_ERC721_CONTRACT_ADDRESS
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
 const TokenOffer: FC = () => {

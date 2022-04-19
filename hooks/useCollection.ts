@@ -2,7 +2,7 @@ import { paths, setParams } from '@reservoir0x/client-sdk'
 import fetcher from 'lib/fetcher'
 import useSWR from 'swr'
 
-const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_ERC721_CONTRACT_ADDRESS
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
 type Orders = paths['/collection/v1']['get']['responses']['200']['schema']

@@ -61,12 +61,12 @@ const IndexPage = () => {
         <a
           className="underline"
           target="_blank"
-          href="https://www.reservoir.fun/collections/0x79e2d470f950f2cf78eef41720e8ff2cf4b3cd78"
+          href="https://www.reservoir.fun/collections/0x4d68e14cd7dec510c84326f54ee41f88e8fad59b"
           rel="norefereer noopener"
         >
-          Loot Contract
+          Reservoir 721
         </a>{' '}
-        on Rinkeby.
+        collection on Rinkeby.
       </p>
       {userAddress && (
         <p>
