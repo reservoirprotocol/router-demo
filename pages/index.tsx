@@ -73,7 +73,7 @@ const IndexPage = () => {
         >
           Reservoir 721
         </a>{' '}
-        and
+        and{' '}
         <a
           className="underline"
           target="_blank"
