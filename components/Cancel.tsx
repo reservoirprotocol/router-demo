@@ -106,21 +106,16 @@ const Cancel: FC<Props> = ({ orders }) => {
     setWaitingTx(false)
   }
 
+  const listingExists = orders.data && id
+
   return (
     <article>
-      {orders.data && !id && (
-        <Error>
-          No listing found. List Reservoir 721 for sale and try again.
-        </Error>
-      )}
       {error}
       {/* Use Radix UI to create a modal to display the current state */}
       {/* of execution for the chosen transaction */}
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger
-          disabled={
-            isWrongNetwork || waitingTx || !signer || (orders.data && !id)
-          }
+          disabled={isWrongNetwork || waitingTx || !signer || !listingExists}
           onClick={() => maker && id && execute(id, maker)}
           className="btn-primary-fill w-[222px] mx-auto"
         >
