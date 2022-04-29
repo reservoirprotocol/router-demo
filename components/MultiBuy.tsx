@@ -1,5 +1,4 @@
 import { buyToken, Execute } from '@reservoir0x/client-sdk'
-import useCollection from 'hooks/useCollection'
 import * as Dialog from '@radix-ui/react-dialog'
 import React, { FC, useState } from 'react'
 import { useAccount, useSigner } from 'wagmi'
@@ -86,7 +85,7 @@ const MultiBuy: FC = () => {
     }
   }
 
-  // Execute this function to buy a token
+  // Execute this function to buy multiple tokens
   const execute = async (taker: string) => {
     // Set the loading state on
     setWaitingTx(true)
