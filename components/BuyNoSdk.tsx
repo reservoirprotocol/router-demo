@@ -74,8 +74,8 @@ async function executeBuy(
 
 const BuyNoSdk = () => {
   // wagmi hooks
-  const [{ data: signer }] = useSigner()
-  const [{ data: accountData }] = useAccount()
+  const { data: signer } = useSigner()
+  const { data: accountData } = useAccount()
 
   // Check if the user is connected to the wrong Ethereum Network
   const isWrongNetwork = useIsWrongNetwork()

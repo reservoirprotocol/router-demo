@@ -19,7 +19,7 @@ type Props = {
 
 const Cancel: FC<Props> = ({ orders }) => {
   // wagmi hooks
-  const [{ data: signer }] = useSigner()
+  const { data: signer } = useSigner()
 
   // Check if the user is connected to the wrong Ethereum Network
   const isWrongNetwork = useIsWrongNetwork()

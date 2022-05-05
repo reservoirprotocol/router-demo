@@ -15,7 +15,7 @@ import BuyNoSdk from 'components/BuyNoSdk'
 
 const IndexPage = () => {
   // wagmi hooks
-  const [{ data: accountData }] = useAccount()
+  const { data: accountData } = useAccount()
 
   // Load an user's active list order using
   //the `/orders/asks/v1` endpoint

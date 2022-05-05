@@ -30,7 +30,7 @@ function shrinkEns(ensName: string, shrinkInidicator?: string) {
 }
 
 type Props = {
-  address: string
+  address: string | undefined
   ens?: {
     avatar: string | null | undefined
     name: string | null | undefined
@@ -51,7 +51,7 @@ const EthAccount: FC<Props> = ({ address, ens, title }) => {
           className="reservoir-label-l block whitespace-nowrap font-mono"
           title={address}
         >
-          {shrinkAddress(address)}
+          {shrinkAddress(address || '')}
         </div>
       )}
       {ens?.avatar ? (
