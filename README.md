@@ -1,3 +1,5 @@
+## The router demo is still functional but has been deprecated in favor of our [sandbox demos](https://github.com/reservoirprotocol/sandbox) and [docs](https://docs.reservoir.tools/docs)
+
 # router-demo
 
 The Reservoir client SDK contains helper functions to execute common actions for an NFT marketplace.
